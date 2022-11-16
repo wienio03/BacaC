@@ -1,12 +1,26 @@
 //Wieńczysław Włodyga
 #include <iostream>
-
-
 void Cardinality(int set[], int* cardinality) {
     *(cardinality)=0;
     while (set[*cardinality]!=(-1)) {
             (*cardinality)++;
         }
+
+}
+void MinMax(int set[], int* min, int &max){
+    int size;
+    *min=set[0];
+    max=set[0];
+    int i = 0 , j = 0;
+    Cardinality(set, &size);
+    while (i<size) {
+        if(set[i]>max) max=set[i];
+        i++;
+    }
+    while (j<size) {
+        if(set[j]<*min) *min=set[j];
+        j++;
+    }
 
 }
 void Add(int number, int set[]){
@@ -16,14 +30,6 @@ void Add(int number, int set[]){
         n++;
     set[n-1]=number;
     set[n]=(-1);
-    }
-}
-void Create(unsigned int usedElements, int parentSet[], int set[]) {
-    int n;
-    int m;
-    for (n = 0; n < usedElements - 1; n++) {
-        if (parentSet[n] >= 1 && parentSet[n] <= 4095) set[n] = parentSet[n];
-        else usedElements++;
     }
 }
     void Union(int set1[],int set2[], int setResultant[]){
@@ -70,8 +76,9 @@ double Arithmetic (int set[]){
     Cardinality (set,&size);
     if (size==0) aMean=0;
     else {
-        while(n<size-1){
+        while(n<size){
             aMean+=set[n];
+            n++;
         }
         aMean=(aMean/n);
     }
@@ -101,6 +108,8 @@ int main() {
     int sizetest;
     int setsize;
     int number1=6;
+    int maximum;
+    int minimum;
     Add(number1,array);
     int z;
     for (z=0; z<6;z++) {
@@ -113,7 +122,9 @@ int main() {
     std::cout << std::endl;
     std::cout << sizetest << std::endl;
     std::cout << Harmonic(array) << std::endl;
-    std::cout << Arithmetic(array);
+    std::cout << Arithmetic(array)<< std::endl;
+    MinMax(array, &minimum, maximum);
+    std::cout << minimum << " " << maximum;
     return 0;
 
 }
