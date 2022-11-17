@@ -21,7 +21,6 @@ void MinMax(int set[], int* min, int &max){
         if(set[j]<*min) *min=set[j];
         j++;
     }
-
 }
 void Add(int number, int set[]){
     int n;
@@ -30,6 +29,17 @@ void Add(int number, int set[]){
         n++;
     set[n-1]=number;
     set[n]=(-1);
+    }
+}
+void Create(unsigned int usedElements, int sourceSet[], int set[]) {
+    int i;
+    for (i = 0; i < usedElements; i++) {
+        if (1 <= sourceSet[i] && sourceSet[i] <= 4095) {
+            set[i]=sourceSet[i];
+        } else {
+            usedElements++;
+            i++;
+        }
     }
 }
     void Union(int set1[],int set2[], int setResultant[]){
@@ -103,28 +113,33 @@ double Harmonic (int set[]){
     return hMean;
 }
 int main() {
-    int array[5]={4,3,2,1, -1};
+    int array[5] = {4, 3, 2, 1, -1};
     int arraytest[1]{-1};
     int sizetest;
+    int arraytest1[4] = {1,2,5000,3} ;
+    int settest1[1];
     int setsize;
-    int number1=6;
+    int number1 = 6;
     int maximum;
     int minimum;
-    Add(number1,array);
+    Add(number1, array);
     int z;
-    for (z=0; z<6;z++) {
+    for (z = 0; z < 6; z++) {
         std::cout << array[z] << " ";
     }
-    Cardinality(array,&setsize);
+    Cardinality(array, &setsize);
     Cardinality(arraytest, &sizetest);
     std::cout << std::endl;
     std::cout << setsize;
     std::cout << std::endl;
     std::cout << sizetest << std::endl;
     std::cout << Harmonic(array) << std::endl;
-    std::cout << Arithmetic(array)<< std::endl;
+    std::cout << Arithmetic(array) << std::endl;
     MinMax(array, &minimum, maximum);
-    std::cout << minimum << " " << maximum;
+    std::cout << minimum << " " << maximum << std::endl;
+    Create(3, arraytest1, settest1);
+    for (z = 0; z < 3; z++) {
+        std::cout << settest1[z] << " ";
+    }
     return 0;
-
 }
